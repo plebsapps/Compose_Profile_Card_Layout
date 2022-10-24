@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -39,9 +41,10 @@ fun MainScreen(userProfiles: List<UserProfile>) {
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            Column() {
-                for (userProfile in userProfiles)
-                    ProfileCard(userProfile)
+            LazyColumn() {
+                items(userProfiles) { userProfile ->
+                    ProfileCard(userProfile = userProfile)
+                }
             }
         }
     }
@@ -108,20 +111,16 @@ fun ProfileContent(userName: String, onlineStatus: Boolean) {
             .padding(8.dp)
             .fillMaxWidth()
     ) {
-
-
-        CompositionLocalProvider(LocalContentAlpha provides if (onlineStatus) ContentAlpha.high else ContentAlpha.medium) {
-            Text(
-                userName,
-                style = MaterialTheme.typography.h5
-            )
-        }
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            Text(
-                text = if (onlineStatus) "Active now" else "Offline",
-                style = MaterialTheme.typography.body2
-            )
-        }
+        Text(
+            userName,
+            color = if (onlineStatus) Color.Black else Color.Gray,
+            style = MaterialTheme.typography.h5
+        )
+        Text(
+            text = if (onlineStatus) "Active now" else "Offline",
+            color = if (onlineStatus) Color.DarkGray else Color.Gray,
+            style = MaterialTheme.typography.body2
+        )
     }
 }
 
