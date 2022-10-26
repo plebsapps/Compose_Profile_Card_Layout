@@ -1,6 +1,5 @@
 package ch.plebsapps.composeprofilecardlayout
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +13,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ch.plebsapps.composeprofilecardlayout.ui.theme.LightGreen
 import ch.plebsapps.composeprofilecardlayout.ui.theme.MyTheme
+import coil.compose.AsyncImage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +33,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun MainScreen(userProfiles: List<UserProfile>) {
@@ -49,6 +49,7 @@ fun MainScreen(userProfiles: List<UserProfile>) {
         }
     }
 }
+
 
 @Composable
 fun AppBar() {
@@ -79,28 +80,9 @@ fun ProfileCard(userProfile: UserProfile) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
-            ProfilePicture(userProfile.drawableId, userProfile.status)
+            ProfilePicture(userProfile.pictureUrl, userProfile.status)
             ProfileContent(userProfile.name, userProfile.status)
         }
-    }
-}
-
-@Composable
-fun ProfilePicture(drawableId: Int, onlineStatus: Boolean) {
-    Card(
-        shape = CircleShape,
-        border = BorderStroke(
-            width = 2.dp,
-            color = if (onlineStatus) MaterialTheme.colors.LightGreen else Color.Red
-        ),
-        modifier = Modifier.padding(16.dp),
-        elevation = 4.dp
-    ) {
-        Image(
-            painter = painterResource(id = drawableId),
-            contentDescription = "Picture",
-            modifier = Modifier.size(72.dp)
-        )
     }
 }
 
@@ -123,6 +105,36 @@ fun ProfileContent(userName: String, onlineStatus: Boolean) {
         )
     }
 }
+
+
+
+@Composable
+fun ProfilePicture(pictureURL: String, onlineStatus: Boolean) {
+    Card(
+        shape = CircleShape,
+        border = BorderStroke(
+            width = 2.dp,
+            color = if (onlineStatus) MaterialTheme.colors.LightGreen else Color.Red
+        ),
+        modifier = Modifier.padding(16.dp),
+        elevation = 4.dp
+    )
+    {
+        AsyncImage (
+            model = pictureURL,
+            contentDescription = "Pictures",
+            modifier = Modifier.size(72.dp)
+        )
+        /*
+        Image (
+            painter = painterResource(id = R.drawable.images3),
+            contentDescription = "Picture",
+            modifier = Modifier.size(72.dp)
+        )*/
+    }
+
+}
+
 
 @Preview(showBackground = true)
 @Composable
