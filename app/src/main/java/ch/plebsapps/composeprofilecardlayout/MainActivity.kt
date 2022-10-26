@@ -114,7 +114,7 @@ fun ProfilePicture(pictureURL: String, onlineStatus: Boolean) {
         elevation = 4.dp
     )
     {
-        AsyncImage (
+        AsyncImage(
             model = pictureURL,
             contentDescription = "Pictures",
             modifier = Modifier.size(72.dp)
