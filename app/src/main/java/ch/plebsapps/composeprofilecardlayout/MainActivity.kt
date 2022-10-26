@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ch.plebsapps.composeprofilecardlayout.ui.theme.LightGreen
@@ -34,7 +32,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @Composable
 fun MainScreen(userProfiles: List<UserProfile>) {
     Scaffold(topBar = { AppBar() }) {
@@ -49,7 +46,6 @@ fun MainScreen(userProfiles: List<UserProfile>) {
         }
     }
 }
-
 
 @Composable
 fun AppBar() {
@@ -106,8 +102,6 @@ fun ProfileContent(userName: String, onlineStatus: Boolean) {
     }
 }
 
-
-
 @Composable
 fun ProfilePicture(pictureURL: String, onlineStatus: Boolean) {
     Card(
@@ -125,16 +119,8 @@ fun ProfilePicture(pictureURL: String, onlineStatus: Boolean) {
             contentDescription = "Pictures",
             modifier = Modifier.size(72.dp)
         )
-        /*
-        Image (
-            painter = painterResource(id = R.drawable.images3),
-            contentDescription = "Picture",
-            modifier = Modifier.size(72.dp)
-        )*/
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
